@@ -1,5 +1,7 @@
 import { kaboomContext } from "./kaboomCtx";
 
+const SCENE_NAME = "level-1";
+
 async function gameSetup() {
   kaboomContext.loadSprite("assets", "./kirby-like.png", {
     sliceX: 9,
@@ -17,7 +19,21 @@ async function gameSetup() {
     },
   });
 
-  kaboomContext.loadSprite("level-1", "./level-1.png");
+  kaboomContext.loadSprite(SCENE_NAME, "./level-1.png");
+
+  kaboomContext.scene(SCENE_NAME, () => {
+    kaboomContext.setGravity(2100);
+
+    // Define properties of the background
+    kaboomContext.add([
+      // Create background as rect and use the full width and height
+      kaboomContext.rect(kaboomContext.width(), kaboomContext.height()),
+      kaboomContext.color(kaboomContext.Color.fromHex("#f7d7db")),
+      kaboomContext.fixed(),
+    ]);
+  });
+
+  kaboomContext.go(SCENE_NAME);
 }
 
 gameSetup();
