@@ -19,7 +19,7 @@ async function gameSetup() {
     },
   });
 
-  kaboomContext.loadSprite(SCENE_NAME, "./level-1.png");
+  kaboomContext.loadSprite(SCENE_NAME, "./public/level-1.png");
 
   kaboomContext.scene(SCENE_NAME, () => {
     kaboomContext.setGravity(2100);

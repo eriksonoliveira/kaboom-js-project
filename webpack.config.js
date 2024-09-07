@@ -3,8 +3,9 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
-
+const outputDir = "dist";
 
 module.exports = (env, argv) => {
   const devMode = argv.mode !== "production";
@@ -13,7 +14,7 @@ module.exports = (env, argv) => {
     mode: argv.mode,
     entry: ["./src/main.ts"],
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, outputDir),
       filename: "index.js",
     },
     devServer: {
@@ -66,6 +67,9 @@ module.exports = (env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "public", "index.html"),
+      }),
+      new CopyPlugin({
+        patterns: [{ from: 'public/*.png' }]
       }),
       new CleanWebpackPlugin(),
     ]
